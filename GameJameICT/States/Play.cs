@@ -17,7 +17,11 @@ namespace GameJameICT.States
     {
         private List<Sprite> _sprites;
         SpriteFont font;
-       
+        HealthBar healthBar;
+        Mask mask;
+
+
+
         public void LoadContent(ContentManager content)//Load all sprites, fonts,scenes, etc... 
         {
             font = content.Load<SpriteFont>("FontText");//SpriteFont is just for fonts needs to be changed for other types of content 
@@ -27,7 +31,7 @@ namespace GameJameICT.States
                  {"WalkDown", new Animation(content.Load<Texture2D>("DrWalkingFront"),3)},
                  {"WalkLeft", new Animation(content.Load<Texture2D>("DrWalkingLeft"),3)},
                  {"WalkRight", new Animation(content.Load<Texture2D>("DrWalkingRight"),3)},
-                
+
             };
             _sprites = new List<Sprite>()
             {
@@ -44,19 +48,17 @@ namespace GameJameICT.States
                     },
                 },
             };
-        HealthBar healthBar;
-        Mask mask;
 
-       
-        public void LoadContent(ContentManager content)
-        {
-            font = content.Load<SpriteFont>("FontText");
+
             healthBar = new HealthBar();
             healthBar.LoadContent(content);
 
             mask = new Mask();
             mask.LoadContent(content, healthBar);
-        }
+
+
+        }  
+
 
         public void Update(GameTime gameTime, GameStateManager gsm)//Called once a frame (where Key inputs get updated)
         {
@@ -68,16 +70,18 @@ namespace GameJameICT.States
             
         }
 
-        public void Draw(SpriteBatch spriteBatch)//Sets initial position 
-        {
-            spriteBatch.DrawString(font, "Play State", new Vector2(100, 100), Color.Red);//Test text Drawl string is for fonts only 
-      
+        public void Draw(SpriteBatch spriteBatch)
+        {            
+
             foreach (var sprite in _sprites)
                 sprite.Draw(spriteBatch);
-   
+
             healthBar.Draw(spriteBatch);
             mask.Draw(spriteBatch);
         }
 
+
     }
+
+
 }
