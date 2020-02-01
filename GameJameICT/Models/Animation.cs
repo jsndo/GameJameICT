@@ -13,7 +13,7 @@ namespace GameJameICT.Models
         public int FrameCount { get; set; }
         public int FrameHeight { get { return Texture.Height; } }
         public float FrameSpeed { get; set; }
-        public int FrameWidth { get; { return Texture.WIdth / FrameCount; } }
+        public int FrameWidth { get { return Texture.Width / FrameCount; } }
         public bool IsLooping { get; set; }
         public Texture2D Texture { get; private set; }
         public Animation(Texture2D texture, int frameCount)

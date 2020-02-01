@@ -41,7 +41,7 @@ namespace GameJameICT.Managers
         public void Stop()
         {
             _timer = 0f;
-            _animation.CurrentFrame = 0;
+            _animation.CurrentFrame = 1;
 
         }
         public void Update(GameTime gameTime)
