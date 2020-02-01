@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameJameICT.States;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -11,6 +12,7 @@ namespace GameJameICT
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        GameStateManager gsm;
 
         public Game1()
         {
@@ -27,7 +29,7 @@ namespace GameJameICT
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+           
             base.Initialize();
         }
 
@@ -39,6 +41,8 @@ namespace GameJameICT
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            gsm = new GameStateManager();
+            gsm.LoadContent(Content);
 
             // TODO: use this.Content to load your game content here
         }
@@ -64,7 +68,7 @@ namespace GameJameICT
 
             // TODO: Add your update logic here
 
-            base.Update(gameTime);
+            gsm.Update(gameTime);
         }
 
         /// <summary>
@@ -76,8 +80,9 @@ namespace GameJameICT
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-
-            base.Draw(gameTime);
+            spriteBatch.Begin();
+            gsm.Draw(spriteBatch);
+            spriteBatch.End();
         }
     }
 }
