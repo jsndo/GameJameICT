@@ -14,7 +14,7 @@ namespace GameJameICT.Entities
 {
     public class HealthBar
     {
-        private const int HEALTH = 2;
+        private const int HEALTH = 25;
         private int currentHealth = HEALTH;
 
         //Health will go down one point for every unit of time; adjust as needed

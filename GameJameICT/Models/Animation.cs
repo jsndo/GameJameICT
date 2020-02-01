@@ -23,5 +23,7 @@ namespace GameJameICT.Models
             IsLooping = true;
             FrameSpeed = 0.2f;
         }
+
+        
     }
 }

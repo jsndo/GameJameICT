@@ -10,45 +10,25 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using GameJameICT.Entities;
+using GameJameICT.Common;
 
 namespace GameJameICT.States
 {
     class Play : State
     {
-        private List<Sprite> _sprites;
+       
         SpriteFont font;
         HealthBar healthBar;
         Mask mask;
-
-
+        private Stack<Mask> _stackOfMask = new Stack<Mask>();
+        Player player;
 
         public void LoadContent(ContentManager content)//Load all sprites, fonts,scenes, etc... 
         {
             font = content.Load<SpriteFont>("FontText");//SpriteFont is just for fonts needs to be changed for other types of content 
-            var animations = new Dictionary<string, Animation>()
-            {
-                {"WalkUp", new Animation(content.Load<Texture2D>("DrWalkingBack"),3)},
-                 {"WalkDown", new Animation(content.Load<Texture2D>("DrWalkingFront"),3)},
-                 {"WalkLeft", new Animation(content.Load<Texture2D>("DrWalkingLeft"),3)},
-                 {"WalkRight", new Animation(content.Load<Texture2D>("DrWalkingRight"),3)},
 
-            };
-            _sprites = new List<Sprite>()
-            {
-                new Sprite(animations)
-                {
-                    Position = new Vector2(100,100),
-                    Input = new Input()
-                    {
-                        Up = Keys.W,
-                        Down = Keys.S,
-                        Left = Keys.A,
-                        Right = Keys.D,
-
-                    },
-                },
-            };
-
+            player = new Player();
+            player.LoadContent(content);
 
             healthBar = new HealthBar();
             healthBar.LoadContent(content);
@@ -56,28 +36,55 @@ namespace GameJameICT.States
             mask = new Mask();
             mask.LoadContent(content, healthBar);
 
+            mask = new Mask();
+            mask.LoadContent(content, healthBar);
+
+            _stackOfMask.Push(mask);
+
 
         }  
 
 
         public void Update(GameTime gameTime, GameStateManager gsm)//Called once a frame (where Key inputs get updated)
         {
-            foreach (var sprite in _sprites)
-                sprite.Update(gameTime, _sprites);
-            
+
+            player.Update(gameTime);
             healthBar.Update(gameTime, gsm);
             mask.Update(gameTime);
+            
+            if(_stackOfMask.Any())
+            {
+                if (Collision.Hit(player.Position, player.Dimensions, mask.Position, mask.Dimensions))
+                {
+                    mask.IncrementCount++;
+                    if (_stackOfMask.Any())
+                    {
+                        _stackOfMask.Pop();
+                    }
+                }
+            }
+            
+           
+
+            //if (Collision.Hit(player.GetRect, mask.GetRect))
+            //{
+            //    mask.IncrementCount++;
+            //}
+            
             
         }
 
         public void Draw(SpriteBatch spriteBatch)
-        {            
+        {
 
-            foreach (var sprite in _sprites)
-                sprite.Draw(spriteBatch);
-
+            player.Draw(spriteBatch);
             healthBar.Draw(spriteBatch);
-            mask.Draw(spriteBatch);
+
+            foreach(var mask in _stackOfMask)
+            {
+                mask.Draw(spriteBatch);
+            }
+            
         }
 
 
