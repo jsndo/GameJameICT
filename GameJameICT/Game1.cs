@@ -18,6 +18,7 @@ namespace GameJameICT
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
         }
 
         /// <summary>
@@ -41,8 +42,10 @@ namespace GameJameICT
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            Content.Load<SpriteFont>("FontText");
             gsm = new GameStateManager();
-            gsm.LoadContent(Content);
+            gsm.Initialize(this);
+            gsm.SetState(new Intro());
 
             // TODO: use this.Content to load your game content here
         }

@@ -21,7 +21,7 @@ namespace GameJameICT.States
             throw new NotImplementedException();
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, GameStateManager gsm)
         {
             throw new NotImplementedException();
         }

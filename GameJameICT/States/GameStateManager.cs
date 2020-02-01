@@ -9,22 +9,17 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameJameICT.States
 {
-    class GameStateManager
+    public class GameStateManager
     {
         Stack<State> gameStates = new Stack<State>();
         State currentState;
+        private Game _game;
 
-        public GameStateManager()
+        public void Initialize(Game game)
         {
-            SetState(new Intro());
-            currentState = (State)gameStates.Peek();
+            _game = game;
         }
 
-        public void LoadContent(ContentManager content)
-        {
-            currentState.LoadContent(content);
-        }
-       
 
         public void Update(GameTime gameTime)
         {
@@ -38,7 +33,9 @@ namespace GameJameICT.States
                 gameStates.Pop();
             }
             
-            gameStates.Push(state);            
+            gameStates.Push(state);
+            currentState = (State)gameStates.Peek();
+            currentState.LoadContent(_game.Content);
         }
 
         public void Draw(SpriteBatch spriteBatch)
