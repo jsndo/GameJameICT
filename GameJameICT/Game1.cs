@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using GameJameICT.Common;
+using GameJameICT.Entities;
 
 namespace GameJameICT
 {
@@ -50,6 +51,8 @@ namespace GameJameICT
             gsm = new GameStateManager();
             gsm.Initialize(this);
             gsm.SetState(new Intro());
+
+            
 
             // TODO: use this.Content to load your game content here
         }

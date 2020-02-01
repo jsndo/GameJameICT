@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using GameJameICT.Entities;
 
 namespace GameJameICT.States
 {
@@ -43,12 +44,27 @@ namespace GameJameICT.States
                     },
                 },
             };
+        HealthBar healthBar;
+        Mask mask;
+
+       
+        public void LoadContent(ContentManager content)
+        {
+            font = content.Load<SpriteFont>("FontText");
+            healthBar = new HealthBar();
+            healthBar.LoadContent(content);
+
+            mask = new Mask();
+            mask.LoadContent(content, healthBar);
         }
 
         public void Update(GameTime gameTime, GameStateManager gsm)//Called once a frame (where Key inputs get updated)
         {
             foreach (var sprite in _sprites)
                 sprite.Update(gameTime, _sprites);
+            
+            healthBar.Update(gameTime, gsm);
+            mask.Update(gameTime);
             
         }
 
@@ -59,6 +75,8 @@ namespace GameJameICT.States
             foreach (var sprite in _sprites)
                 sprite.Draw(spriteBatch);
    
+            healthBar.Draw(spriteBatch);
+            mask.Draw(spriteBatch);
         }
 
     }
