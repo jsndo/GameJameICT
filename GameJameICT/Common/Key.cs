@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using GameJameICT.States;
+using Microsoft.Xna.Framework;
 
 namespace GameJameICT.Common
 {
@@ -20,5 +22,12 @@ namespace GameJameICT.Common
         {
             return Keyboard.GetState().IsKeyUp(keys);
         }
+
+        public static Keys[] GetKeyPressed()
+        {
+            return Keyboard.GetState().GetPressedKeys();
+        }
     }
+
+   
 }
