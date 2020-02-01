@@ -13,19 +13,19 @@ namespace GameJameICT.States
     {
         SpriteFont font;
        
-        public void LoadContent(ContentManager content)
+        public void LoadContent(ContentManager content)//Load all sprites, fonts,scenes, etc... 
         {
-            font = content.Load<SpriteFont>("FontText");
+            font = content.Load<SpriteFont>("FontText");//SpriteFont is just for fonts needs to be changed for other types of content 
         }
 
-        public void Update(GameTime gameTime, GameStateManager gsm)
+        public void Update(GameTime gameTime, GameStateManager gsm)//Called once a frame (where Key inputs get updated)
         {
 
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)//Sets initial position 
         {
-            spriteBatch.DrawString(font, "Play State", new Vector2(100, 100), Color.Red);
+            spriteBatch.DrawString(font, "Play State", new Vector2(100, 100), Color.Red);//Test text Drawl string is for fonts only 
         }
 
     }
