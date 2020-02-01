@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using GameJameICT.Common;
 
 namespace GameJameICT.States
 {
@@ -26,19 +27,13 @@ namespace GameJameICT.States
 
        
 
-        public void Update(GameTime gameTime)
-        {
-            //throw new NotImplementedException();
-            if(Keyboard.GetState().IsKeyDown(Keys.Enter))
-            {
-
-            }
-            
-        }
-
         public void Update(GameTime gameTime, GameStateManager gsm)
         {
-            throw new NotImplementedException();
+            if(Key.Down(Keys.Enter))
+            {
+                gsm.SetState(new Play());
+            }            
         }
+
     }
 }

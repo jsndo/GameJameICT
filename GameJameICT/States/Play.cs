@@ -11,24 +11,22 @@ namespace GameJameICT.States
 {
     class Play : State
     {
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            throw new NotImplementedException();
-        }
-
+        SpriteFont font;
+       
         public void LoadContent(ContentManager content)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Update(GameTime gameTime)
-        {
-            throw new NotImplementedException();
+            font = content.Load<SpriteFont>("FontText");
         }
 
         public void Update(GameTime gameTime, GameStateManager gsm)
         {
-            throw new NotImplementedException();
+
         }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.DrawString(font, "Play State", new Vector2(100, 100), Color.Red);
+        }
+
     }
 }
