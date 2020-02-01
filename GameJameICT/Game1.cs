@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using GameJameICT.Common;
 
 namespace GameJameICT
 {
@@ -13,12 +14,15 @@ namespace GameJameICT
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         GameStateManager gsm;
-
+        
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = Screen.Width;
+            graphics.PreferredBackBufferHeight = Screen.Height;
+            graphics.IsFullScreen = false;
             Content.RootDirectory = "Content";
-
+            
         }
 
         /// <summary>
@@ -72,6 +76,7 @@ namespace GameJameICT
             // TODO: Add your update logic here
 
             gsm.Update(gameTime);
+            
         }
 
         /// <summary>
@@ -80,7 +85,7 @@ namespace GameJameICT
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();

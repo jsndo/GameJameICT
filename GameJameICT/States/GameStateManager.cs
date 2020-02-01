@@ -26,16 +26,28 @@ namespace GameJameICT.States
             currentState.Update(gameTime, this);
         }
 
+        /// <summary>
+        /// Adds the new state to the stack. NOTE: the previous, if any, state is still in the stack. If need to remove current state before pushing new on on, refer to PopAndSetState
+        /// </summary>
+        /// <param name="state"></param>
         public void SetState(State state)
-        {            
-            if(gameStates.Count > 0)
-            {
-                gameStates.Pop();
-            }
-            
+        {                               
             gameStates.Push(state);
             currentState = (State)gameStates.Peek();
             currentState.LoadContent(_game.Content);
+        }
+
+        /// <summary>
+        /// Removes the current state and adds the new state onto the stack
+        /// </summary>
+        /// <param name="state"></param>
+        public void PopAndSetState(State state)
+        {
+            if (gameStates.Count > 0)
+            {
+                gameStates.Pop();
+            }
+            SetState(state);
         }
 
         public void Draw(SpriteBatch spriteBatch)
